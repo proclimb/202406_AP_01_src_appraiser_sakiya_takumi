@@ -337,7 +337,11 @@ function subStockEditView($param)
 					for ($i = 0; $i < 6; $i++) {
 					?>
 						<br />
-						<input type="radio" name="how" value="<?php print $i + 1; ?>" <?php if ($param["how"] == $i + 1) print ' checked="checked"'; ?> /> <?php print fnHowName($i); ?>
+						<input type="radio" name="how" value="<?php print $i + 1; ?>" <?php if ($param["how"] == $i + 1) {
+																							print ' checked="checked"';
+																						} else if (!isset($param["how"]) && ($i == 0)) {
+																							print " checked";
+																						} ?> /> <?php print fnHowName($i); ?>
 					<?php
 					}
 					?>
