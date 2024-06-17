@@ -6,14 +6,14 @@ function subConst()
 {
 	$conn = fnDbConnect();
 
-	$sDel            = htmlspecialchars($_REQUEST['sDel']);
-	$sArticle        = htmlspecialchars($_REQUEST['sArticle']);
-	$sConstTrader    = htmlspecialchars($_REQUEST['sConstTrader']);
-	$sConstFlg1      = htmlspecialchars($_REQUEST['sConstFlg1']);
-	$sConstFlg2      = htmlspecialchars($_REQUEST['sConstFlg2']);
-	$sConstFlg3      = htmlspecialchars($_REQUEST['sConstFlg3']);
-	$sConstFlg4      = htmlspecialchars($_REQUEST['sConstFlg4']);
-	$sInteriorCharge = htmlspecialchars($_REQUEST['sInteriorCharge']);
+	$sDel            = htmlspecialchars($_REQUEST['sDel']); // 除外
+	$sArticle        = htmlspecialchars($_REQUEST['sArticle']); // 物件名
+	$sConstTrader    = htmlspecialchars($_REQUEST['sConstTrader']); // 施工業者
+	$sConstFlg1      = htmlspecialchars($_REQUEST['sConstFlg1']);  // 工事中 工事前
+	$sConstFlg2      = htmlspecialchars($_REQUEST['sConstFlg2']);  // 工事中 工事中
+	$sConstFlg3      = htmlspecialchars($_REQUEST['sConstFlg3']);  // 工事中 工事終了
+	$sConstFlg4      = htmlspecialchars($_REQUEST['sConstFlg4']);  // 工事中 物件修了
+	$sInteriorCharge = htmlspecialchars($_REQUEST['sInteriorCharge']); // 内装担当者
 
 	$orderBy = $_REQUEST['orderBy'];
 	$orderTo = $_REQUEST['orderTo'];

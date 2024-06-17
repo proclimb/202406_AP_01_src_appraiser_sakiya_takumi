@@ -1,0 +1,38 @@
+フォルダ
+    stock
+        仕入管理
+
+
+
+
+ファイル
+    view.php
+        ・実際に画面に表示させるフォームなどのHTML要素を含んだ関数を定義している場所
+
+    logic.php
+        ・画面を遷移させるための関数定義一覧。stock\model.phpで定義した関数も使用されている
+
+    model.php
+        ・仕入管理リストで使用する、パーツとしての関数の定義一覧
+
+    SRC\libLoginout.php
+        ・ログイン画面
+        ・ログインボタンを押下すると <input type="hidden" name="act" value="loginCheck" /> で $_REQUEST["act"] = "loginCheck" が設定される。
+
+    SRC\libArticle.php
+        ・物件管理画面
+        ・<input type="hidden" name="act" value="articleSearch" /> で $_REQUEST["act"] = "articleSearch" が設定される
+
+変数
+    $_REQUEST
+        ・PHPの定義済み変数のリクエスト変数(スーパーグローバル変数)。
+        ・データ型は配列。
+        ・現在の$_GET、$_POST、$_COOKIEの内容をまとめた変数(配列変数)。
+        ・PHPディレクティブ（php.ini）の variables_order の設定によって $_ENV、$_SERVER を追加することもできる。
+        このディレクティブの設定で登録順序も指定できる。$_REQUESTの仕様設定 request_order。初期値では COOKIE ＞ POST ＞ GET の順で優先される。
+
+
+    $param
+        ・連想配列
+        ・画面遷移の度に初期化
+        ・form要素で取得後に登録された値を都度取り出している

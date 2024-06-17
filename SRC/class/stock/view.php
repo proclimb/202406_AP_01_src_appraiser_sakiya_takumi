@@ -1,5 +1,6 @@
 <?php
-//
+// 実際に画面に表示させるフォームなどのHTML要素を含んだ関数を定義している場所
+
 //仕入管理画面
 //
 function subStockView($param)
@@ -119,6 +120,7 @@ function subStockView($param)
 			return;
 		}
 
+		// SQL文作成
 		$sql = fnSqlStockList(1, $param);
 		$res = mysqli_query($param["conn"], $sql);
 		$row = mysqli_fetch_array($res);
@@ -254,13 +256,14 @@ function subStockEditView($param)
 			<tr>
 				<th>ランク</th>
 				<td>
-					<?php
-					for ($i = 0; $i < 5; $i++) {
-					?>
-						<input type="radio" name="rank" value="<?php print $i + 1; ?>" <?php if ($param["rank"] == $i + 1) print ' checked="checked"'; ?> /> <?php print fnRankName($i); ?>
-					<?php
-					}
-					?>
+					<?php for ($i = 0; $i < 5; $i++) { ?>
+						<input type="radio" name="rank" value="<?php print $i + 1; ?>" <?php if ($param["rank"] == $i + 1) {
+																							print " checked";
+																						} else if (!isset($param["rank"]) && ($i == 0)) {
+																							print " checked";
+																						}
+																						?> /> <?php print fnRankName($i); ?>
+					<?php } ?>
 				</td>
 			</tr>
 			<tr>

@@ -1,7 +1,7 @@
 <?php
+// 画面を遷移させるための関数定義一覧。stock\model.phpで定義した関数も使用されている
 
-//
-// 仕入管理画面
+// 仕入管理画面(仕入管理画面のトップページ)
 //
 function subStock()
 {
@@ -16,11 +16,11 @@ function subStock()
         $param["sDel"] = 1;
     }
 
-    if (! $param["sPage"]) {
+    if (!$param["sPage"]) {
         $param["sPage"] = 1;
     }
 
-    if (! $param["orderBy"]) {
+    if (!$param["orderBy"]) {
         $param["orderBy"] = 'STOCKNO';
         $param["orderTo"] = 'DESC';
     }
@@ -43,6 +43,7 @@ function subStockEdit()
         $res = mysqli_query($param["conn"], $sql);
         $row = mysqli_fetch_array($res);
 
+        // 登録された値を受け取り、表示させる。
         $param["charge"] = htmlspecialchars($row[0]);
         $param["rank"] = htmlspecialchars($row[1]);
         $param["article"] = htmlspecialchars($row[2]);
@@ -169,15 +170,16 @@ function subStockListDelete()
 
 //
 // 画面間引継ぎ情報
-//
+// $param配列を初期化し、DBに接続後、連想配列として値を代入
 function getStockParam()
 {
+    // 初期化
     $param = array();
 
     // DB接続
     $param["conn"] = fnDbConnect();
 
-    // 検索情報
+    // 検索情報 連想配列として値を代入
     $param["sDel"] = htmlspecialchars($_REQUEST['sDel']);
     $param["sInsDTFrom"] = htmlspecialchars($_REQUEST['sInsDTFrom']);
     $param["sInsDTTo"] = htmlspecialchars($_REQUEST['sInsDTTo']);
@@ -200,5 +202,6 @@ function getStockParam()
     $param["orderTo"] = $_REQUEST['orderTo'];
     $param["sPage"] = $_REQUEST['sPage'];
 
+    // 完成した連想配列が戻り値
     return $param;
 }
