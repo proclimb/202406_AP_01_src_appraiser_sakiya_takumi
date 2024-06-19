@@ -218,6 +218,7 @@ function subStockEditView($param)
 
 	<h1>仕入<?php print $param["purpose"] ?></h1>
 
+	<!-- GETメソッドで渡すが、$_REQUESTから取り出すことになる -->
 	<form name="form" id="form" action="index.php" method="get">
 		<input type="hidden" name="act" />
 		<input type="hidden" name="sDel" value="<?php print $param["sDel"] ?>" />
@@ -351,7 +352,7 @@ function subStockEditView($param)
 		</table>
 
 		<a href="javascript:fnStockEditCheck();"><img src="./images/<?php print $param["btnImage"] ?>" /></a>　
-		<a href="javascript:form.act.value='stockEditComplete';form.submit();"><img src="./images/btn_return.png" /></a>
+		<a href="javascript:form.act.value='stockEditComplete';form.submit();"><img src="./images/btn_return.png" /></a> <!-- 多分ここ戻れないエラー -->
 		<?php
 		if ($param["stockNo"]) {
 		?>

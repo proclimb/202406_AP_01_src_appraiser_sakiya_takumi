@@ -88,14 +88,18 @@ function fnNextNo($t)
 {
     $conn = fnDbConnect();
 
-    $sql = "SELECT MAX(".$t."NO) FROM TBL".$t;
+    $sql = "SELECT MAX(" . $t . "NO) FROM TBL" . $t;
     $res = mysqli_query($conn, $sql);
+    // var_dump($res);
     $row = mysqli_fetch_array($res);
+    // var_dump($row);
+    // 最大値があった場合、最大値に1を足して次の番号を得る
     if ($row[0]) {
-        $max = $row[0];
+        $max = $row[0] + 1;
+        // 最大値がなかった場合、最初の仕入番号になる
     } else {
         $max = 1;
     }
-
+    // 次の番号を返す
     return ($max);
 }

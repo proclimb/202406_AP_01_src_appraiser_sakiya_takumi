@@ -154,14 +154,14 @@ function fnSqlStockUpdate($param)
 //
 function fnSqlStockInsert($param)
 {
-    $sql = "INSERT INTO TBLSTOCK(";
-    $sql .= "STOCKNO,CHARGE,RANK,ARTICLE,ARTICLEFURI,ROOM,AREA,STATION,DISTANCE,AGENT,STORE,COVER,VISITDT,DESKPRICE,VENDORPRICE,NOTE,HOW,INSDT,UPDT,DEL";
-    $sql .= ")VALUES(";
-    $sql .= "'" . $param["stockNo"] . "','" . $param["charge"] . "','" . $param["rank"] . "','" . $param["article"] . "','"
+    $sql = "INSERT INTO TBLSTOCK (";
+    $sql .= "STOCKNO,CHARGE,`RANK`,ARTICLE,ARTICLEFURI,ROOM,AREA,STATION,DISTANCE,AGENT,STORE,COVER,VISITDT,DESKPRICE,VENDORPRICE,NOTE,HOW,INSDT,UPDT,DEL";
+    $sql .= ") VALUES (";
+    $sql .= "'" . $param["stockNo"] . "','" . $param["charge"] . "','" . $param["rank"] . "','" . $param["article"] . "','"  // シングルクォート自体を囲っている
         . $param["articleFuri"] . "','" . $param["room"] . "','" . $param["area"] . "','" . $param["station"] . "','"
         . $param["distance"] . "','" . $param["agent"] . "','" . $param["store"] . "','" . $param["cover"] . "','"
         . $param["visitDT"] . "','" . $param["deskPrice"] . "','" . $param["vendorPrice"] . "','" . $param["note"] . "','"
-        . $param["how"] . "',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'" . $param["del"] . "')";
+        . $param["how"] . "'," . CURRENT_TIMESTAMP . "," . CURRENT_TIMESTAMP . ",'" . $param["del"] . "')";
 
     return ($sql);
 }

@@ -78,8 +78,16 @@ function subStockEdit()
 //
 function subStockEditComplete()
 {
-    $conn = fnDbConnect();
+    // mysqli_connectでDB接続する
 
+    $conn = fnDbConnect();
+    // var_dump($conn);
+    /* object(mysqli)#1 (18) { ["affected_rows"]=> int(0) ["client_info"]=> string(14) "mysqlnd 7.4.33" ["client_version"]=> int(70433)
+    ["connect_errno"]=> int(0) ["connect_error"]=> NULL ["errno"]=> int(0) ["error"]=> string(0) "" ["error_list"]=> array(0) { }
+    ["field_count"]=> int(0) ["host_info"]=> string(25) "Localhost via UNIX socket" ["info"]=> NULL ["insert_id"]=> int(0) ["server_info"]=> string(6) "8.0.36" ["server_version"]=> int(80036)
+    ["sqlstate"]=> string(5) "00000" ["protocol_version"]=> int(10) ["thread_id"]=> int(10) ["warning_count"]=> int(1) }
+    */
+    // HTMLエスケープ & $_REQUESTから$paramへ代入
     $param["sDel"] = htmlspecialchars($_REQUEST['sDel']);
     $param["sInsDTFrom"] = htmlspecialchars($_REQUEST['sInsDTFrom']);
     $param["sInsDTTo"] = htmlspecialchars($_REQUEST['sInsDTTo']);
@@ -102,32 +110,40 @@ function subStockEditComplete()
     $param["orderTo"] = $_REQUEST['orderTo'];
     $param["sPage"] = $_REQUEST['sPage'];
 
-    $param["stockNo"] = mysqli_real_escape_string($conn, $_REQUEST['stockNo']);
-    $param["charge"] = mysqli_real_escape_string($conn, $_REQUEST['charge']);
-    $param["rank"] = mysqli_real_escape_string($conn, $_REQUEST['rank']);
-    $param["article"] = mysqli_real_escape_string($conn, $_REQUEST['article']);
-    $param["articleFuri"] = mysqli_real_escape_string($conn, $_REQUEST['articleFuri']);
-    $param["room"] = mysqli_real_escape_string($conn, $_REQUEST['room']);
-    $param["area"] = mysqli_real_escape_string($conn, $_REQUEST['area']);
-    $param["station"] = mysqli_real_escape_string($conn, $_REQUEST['station']);
-    $param["distance"] = mysqli_real_escape_string($conn, $_REQUEST['distance']);
-    $param["agent"] = mysqli_real_escape_string($conn, $_REQUEST['agent']);
-    $param["store"] = mysqli_real_escape_string($conn, $_REQUEST['store']);
-    $param["cover"] = mysqli_real_escape_string($conn, $_REQUEST['cover']);
-    $param["visitDT"] = mysqli_real_escape_string($conn, $_REQUEST['visitDT']);
-    $param["deskPrice"] = mysqli_real_escape_string($conn, $_REQUEST['deskPrice']);
-    $param["vendorPrice"] = mysqli_real_escape_string($conn, $_REQUEST['vendorPrice']);
-    $param["note"] = mysqli_real_escape_string($conn, $_REQUEST['note']);
-    $param["how"] = mysqli_real_escape_string($conn, $_REQUEST['how']);
-    $param["del"] = mysqli_real_escape_string($conn, $_REQUEST['del']);
+    $param["stockNo"] = mysqli_real_escape_string($conn, $_REQUEST['stockNo']); // 仕入番号
+    $param["charge"] = mysqli_real_escape_string($conn, $_REQUEST['charge']); // 担当者
+    $param["rank"] = mysqli_real_escape_string($conn, $_REQUEST['rank']); // ランク
+    $param["article"] = mysqli_real_escape_string($conn, $_REQUEST['article']); // 物件名
+    $param["articleFuri"] = mysqli_real_escape_string($conn, $_REQUEST['articleFuri']); // 物件名(よみ)
+    $param["room"] = mysqli_real_escape_string($conn, $_REQUEST['room']); // 部屋
+    $param["area"] = mysqli_real_escape_string($conn, $_REQUEST['area']); // 面積
+    $param["station"] = mysqli_real_escape_string($conn, $_REQUEST['station']); // 最寄駅
+    $param["distance"] = mysqli_real_escape_string($conn, $_REQUEST['distance']); // 距離
+    $param["agent"] = mysqli_real_escape_string($conn, $_REQUEST['agent']); // 業者名
+    $param["store"] = mysqli_real_escape_string($conn, $_REQUEST['store']); // 店舗名
+    $param["cover"] = mysqli_real_escape_string($conn, $_REQUEST['cover']); // 担当者名
+    $param["visitDT"] = mysqli_real_escape_string($conn, $_REQUEST['visitDT']); // 内見
+    $param["deskPrice"] = mysqli_real_escape_string($conn, $_REQUEST['deskPrice']); // 机上金額
+    $param["vendorPrice"] = mysqli_real_escape_string($conn, $_REQUEST['vendorPrice']); // 売主希望金額
+    $param["note"] = mysqli_real_escape_string($conn, $_REQUEST['note']); // 備考
+    $param["how"] = mysqli_real_escape_string($conn, $_REQUEST['how']); // 仕入経緯
+    $param["del"] = mysqli_real_escape_string($conn, $_REQUEST['del']); // 除外
 
     if ($param["stockNo"]) {
         $sql = fnSqlStockUpdate($param);
         $res = mysqli_query($conn, $sql);
     } else {
+        // 次の番号を得る
         $param["stockNo"] = fnNextNo('STOCK');
+        // INSERT文作成
         $sql = fnSqlStockInsert($param);
-        $res = mysqli_query($conn, $sql);
+        var_dump($sql);
+        /* string(394) "INSERT INTO TBLSTOCK(STOCKNO,CHARGE,RANK,ARTICLE,ARTICLEFURI,ROOM,AREA,STATION,DISTANCE,AGENT,STORE,COVER,VISITDT,DESKPRICE,VENDORPRICE,NOTE,HOW,INSDT,UPDT,DEL)
+        VALUES('1','担当A','1','ファーストコート','ふぁーすとこーと','203','40','上野','1','エディックス','上野店','担当者A','2024/01/17','100','1000','登録確認','1',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'1')" */
+        // SQL文実行、結果を$resへ代入
+        $res = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+        // SQL 構文にエラーがあります。MySQL サーバーのバージョンに対応するマニュアルで、1 行目の 'RANK,ARTICLE,ARTICLEFURI,ROOM,AREA,STATION,DISTANCE,AGENT,STORE,COVER,VISITDT,DE' 付近の正しい構文を確認してください。
+        // var_dump($res); // bool(false)
     }
 
     $_REQUEST['act'] = 'stockSearch';
