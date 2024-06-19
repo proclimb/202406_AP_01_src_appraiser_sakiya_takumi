@@ -10,7 +10,7 @@ function fnSqlStockList($flg, $param) //return $select . $from . $where . $order
             $limit = "";
             break;
         case 1:
-            $select  = "SELECT STOCKNO,CHARGE,RANK,DATE_FORMAT(INSDT,'%Y/%m/%d'),ARTICLE,ARTICLEFURI,ROOM,"
+            $select  = "SELECT STOCKNO,CHARGE,`RANK`,DATE_FORMAT(INSDT,'%Y/%m/%d'),ARTICLE,ARTICLEFURI,ROOM,"
                 . "IF(AREA > 0,AREA,''),STATION,DISTANCE,AGENT,STORE,COVER,IF(VISITDT > '0000-00-00',DATE_FORMAT(VISITDT,'%Y/%m/%d'),''),"
                 . "IF(DESKPRICE > 0,DESKPRICE,''),IF(VENDORPRICE > 0,VENDORPRICE,''),NOTE";
             // 並び替えとデータ抽出数
@@ -36,7 +36,7 @@ function fnSqlStockList($flg, $param) //return $select . $from . $where . $order
             } else {
                 $where .= " OR ";
             }
-            $where .= "RANK = '$value'";
+            $where .= "`RANK` = '$value'";
         }
         $where .= ")";
     }
