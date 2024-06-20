@@ -36,11 +36,19 @@ function fnStockEditCheck() {
 		return;
 	} */
 
-	if (!(tmp.match(/\d{,3}\.\d{,2}/))) {
+	if (!(tmp == "") && (!(tmp.match(/\d{,3}\.\d{,2}/)))) {
 		alert('面積は3桁以内（小数点以下2桁以内）の半角数字で入力してください');
 		return;
 	}
 
+	/*デバッグ
+	if (tmp == "") {
+		console.log(tmp);
+	} else if (!(tmp.match(/\d{,3}\.\d{,2}/))) {
+		alert('面積は3桁以内（小数点以下2桁以内）の半角数字で入力してください');
+		return;
+	}
+	*/
 	tmp = form.station.value;
 	if (tmp.length > 100) {
 		alert('最寄駅は100文字以内で入力してください');
