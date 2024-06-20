@@ -221,7 +221,7 @@ function subStockEditView($param)
 	<h1>仕入<?php print $param["purpose"] ?></h1>
 
 	<!-- GETメソッドで渡すが、$_REQUESTから取り出すことになる -->
-	<form name="form" id="form" action="index.php" method="get">
+	<form name="form" id="form" action="index.php" method="post">
 		<input type="hidden" name="act" />
 		<input type="hidden" name="sDel" value="<?php print $param["sDel"] ?>" />
 		<input type="hidden" name="sInsDTFrom" value="<?php print $param["sInsDTFrom"] ?>" />
