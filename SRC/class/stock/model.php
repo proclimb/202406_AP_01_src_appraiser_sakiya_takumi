@@ -111,7 +111,7 @@ function fnSqlStockList($flg, $param) //return $select . $from . $where . $order
 //
 function fnSqlStockEdit($stockNo)
 {
-    $sql  = "SELECT CHARGE,RANK,ARTICLE,ARTICLEFURI,ROOM,IF(AREA > 0,AREA,''),STATION,DISTANCE,AGENT,STORE,COVER,"
+    $sql  = "SELECT CHARGE,`RANK`,ARTICLE,ARTICLEFURI,ROOM,IF(AREA > 0,AREA,''),STATION,DISTANCE,AGENT,STORE,COVER,"
         . "IF(VISITDT > '0000-00-00',DATE_FORMAT(VISITDT,'%Y/%m/%d'),''),IF(DESKPRICE > 0,DESKPRICE,''),"
         . "IF(VENDORPRICE > 0,VENDORPRICE,''),NOTE,HOW,DEL";
     $sql .= " FROM TBLSTOCK";
