@@ -220,7 +220,7 @@ function subStockEditView($param)
 
 	<h1>仕入<?php print $param["purpose"] ?></h1>
 
-	<!-- GETメソッドで渡すが、$_REQUESTから取り出すことになる -->
+	<!-- POSTメソッドで渡すが、$_REQUESTから取り出すことになる -->
 	<form name="form" id="form" action="index.php" method="post">
 		<input type="hidden" name="act" />
 		<input type="hidden" name="sDel" value="<?php print $param["sDel"] ?>" />
@@ -259,14 +259,19 @@ function subStockEditView($param)
 			<tr>
 				<th>ランク</th>
 				<td>
-					<?php for ($i = 0; $i < 5; $i++) { ?>
-						<input type="radio" name="rank" value="<?php print $i + 1; ?>" <?php if ($param["rank"] == $i + 1) {
-																							print " checked";
-																						} else if (!isset($param["rank"]) && ($i == 0)) {
-																							print " checked";
-																						}
-																						?> /> <?php print fnRankName($i); ?>
-					<?php } ?>
+					<?php if (!$param["stockNo"]) {
+						$param["rank"] = 1;
+					}
+					for ($i = 0; $i < 5; $i++) {
+						$check = '';
+						if (($param["rank"] - 1) == $i) {
+							$check = 'checked = "checked"';
+						}
+					?>
+						<input type="radio" name="rank" value="<?php print $i + 1; ?>" <?php print $check; ?> /> <?php print fnRankName($i); ?>
+					<?php
+					}
+					?>
 				</td>
 			</tr>
 			<tr>
