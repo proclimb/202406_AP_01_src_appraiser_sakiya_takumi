@@ -121,7 +121,7 @@ function subStockView($param)
 		}
 
 		// SQL文作成
-		$sql = fnSqlStockList(1, $param);
+		$sql = fnSqlStockList(0, $param);
 		//var_dump($sql);
 		$res = mysqli_query($param["conn"], $sql);
 		$row = mysqli_fetch_array($res);
