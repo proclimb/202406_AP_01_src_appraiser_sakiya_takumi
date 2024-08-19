@@ -8,9 +8,18 @@ function fnArticleEditCheck() {
 		return;
 	}
 	if (isLength(100, "物件名", form.article)) { return; }
+	if (isLength(100, "部屋番号", form.article)) { return; }
+	if (isLength(200, "鍵場所", form.article)) { return; }
+	if (isLength(100, "住所", form.article)) { return; }
+	if (isLength(200, "備考", form.article)) { return; }
+	if (isLength(100, "キーBox番号", form.article)) { return; }
+	if (isLength(100, "3Dバース", form.article)) { return; }
+	if (isLength(100, "営業担当者", form.article)) { return; }
 
+	if(confirm('この内容で登録します。よろしいですか？')) {
 	form.act.value = 'articleEditComplete';
 	form.submit();
+	}
 }
 
 
