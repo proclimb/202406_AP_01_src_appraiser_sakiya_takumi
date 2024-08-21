@@ -126,10 +126,10 @@ function subArticle()
 					<td class="list_td<?php print $i ?>"><?php print $room ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $keyPlace ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $articleNote ?></td>
+					<td class="list_td<?php print $i ?>"><a href="javascript:form.act.value='stock';form.sName.value='<?php print $article ?>';form.sRoom.value='<?php print $room ?>';form.submit();">表示</a></td>
 					<td class="list_td<?php print $i ?>"><?php print $keyBox ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $drawing ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $sellCharge ?></td>
-					<td class="list_td<?php print $i ?>"><a href="javascript:form.act.value='stock';form.sName.value='<?php print $article ?>';form.sRoom.value='<?php print $room ?>';form.submit();">表示</a></td>
 				</tr>
 			<?php
 				$i = ($i + 1) % 3;
@@ -307,7 +307,7 @@ function subArticleEditComplete()
 		$res = mysqli_query($conn, $sql);
 	} else {
 		// 新規登録
-		$sql = fnSqlArticleInsert(fnNextNo('ARTICLE'), $article, $room, $keyPlace, $address,  $keyBox, $articleNote, $drawing, $sellCharge, $del);
+		$sql = fnSqlArticleInsert(fnNextNo('ARTICLE'), $article, $room, $keyPlace, $address, $articleNote, $keyBox, $drawing, $sellCharge, $del);
 
 		$res = mysqli_query($conn, $sql);
 
